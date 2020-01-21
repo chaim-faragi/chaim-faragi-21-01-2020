@@ -1,30 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom';
-import menu from './components/menu.js';
+import Menu from './components/Menu.js';
+import Favorites from './Favorites.js';
 
 function App() {
   
-  // ***** firstchanel *****
-  const [firstarr,setfirstarr]=useState([{info:'aaa'},{info:'bbb'},{info:'ccc'}]);
-
-  const addInfo = (info)=>{
-    setfirstarr([...firstarr, {info: info}]);
-  }
-
-  const newWindow = () =>{
-    window.open('http://localhost:3000/thirdchanel');
-  }
+ 
   return (
     <Router>
     <div>
-        <h2>Example Title</h2>
-        <Link to ='/'>home</Link><br/>
-        <Link to ='/firstchanel'>first chanel</Link>
-        <hr/>
+      <Menu/>
         <Switch>
           <Route exact path='/'/>
-          
+          <Route path='/favorites' component={() => <Favorites/>}/>
         </Switch>
    
     </div>
