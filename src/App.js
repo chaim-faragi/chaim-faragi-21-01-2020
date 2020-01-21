@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom';
+import menu from './components/menu.js';
 
 function App() {
+  
+  // ***** firstchanel *****
+  const [firstarr,setfirstarr]=useState([{info:'aaa'},{info:'bbb'},{info:'ccc'}]);
+
+  const addInfo = (info)=>{
+    setfirstarr([...firstarr, {info: info}]);
+  }
+
+  const newWindow = () =>{
+    window.open('http://localhost:3000/thirdchanel');
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+    <div>
+        <h2>Example Title</h2>
+        <Link to ='/'>home</Link><br/>
+        <Link to ='/firstchanel'>first chanel</Link>
+        <hr/>
+        <Switch>
+          <Route exact path='/'/>
+          
+        </Switch>
+   
     </div>
+    </Router>
   );
 }
 
