@@ -1,14 +1,17 @@
 import React from 'react'
-import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom';
-
+import {NavLink} from 'react-router-dom';
+import './Menu.css'
 
 export default function Menu() {
     return (
-        <div>
-
-        <Link to ='/'>home</Link><br/>
-        <Link to ='/favorites'>favorites</Link>
-   
-    </div>
+        <table border="0" width="100%">
+        <tbody>
+        <tr>
+            <td width= "50%"></td>
+            <td><NavLink to ='/' exact className="Menu" activeStyle={{backgroundColor: 'lightblue'}}>Home</NavLink></td>
+            <td><NavLink to ='/favorites' className="Menu" activeStyle={{backgroundColor: 'lightblue'}}>Favorites</NavLink></td>
+        </tr>
+        </tbody>
+        </table>
     )
 }

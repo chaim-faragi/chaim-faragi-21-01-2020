@@ -1,0 +1,6 @@
+.City{
+    border: 1px solid black;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 2px 3px #ccc;
+}
