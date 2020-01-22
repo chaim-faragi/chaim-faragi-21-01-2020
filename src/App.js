@@ -14,7 +14,28 @@ class App extends Component{
 
   state={
     cities:[],
+    searchText: ''
   }
+
+  searchCityHandler = (event) =>{
+    this.setState({searchText: event.target.value});
+    console.log(this.state.searchText.length);
+
+    if(this.state.searchText.length >= 2){
+      let req = this.citySearchRequestBuilder(this.state.searchText);
+      this.httpRequest(req);
+    }
+  }
+
+  httpRequest = (request) =>{    
+    axios.get(request).then(response => {
+      console.log(response);
+
+    })
+    .catch(error =>{
+        console.log(error)
+    });
+  }  
 
   citySearchRequestBuilder = (cityName) =>{
     let citySearch = "http://dataservice.accuweather.com/locations/v1/cities/autocomplete?";
@@ -34,42 +55,21 @@ class App extends Component{
     return citySearch + key + language + details;
   }
 
-  httpRequest = () =>{
-    //'http://jsonplaceholder.typicode.com/posts'
-    axios.get()
-    .then(response => {
-      console.log(response);
-        // const posts = response.data.slice(0,8);
-        // const updatedPosts = posts.map(p => {
-        //     return {
-        //         ...p,
-        //         author: 'lior'
-        //     }
-        // })
-        // this.setState({posts: updatedPosts})
-    })
-    .catch(error =>{
-        console.log(error)
-        this.setState({hasError: true})
-    });
+  render(){
+    return (
+      <Router>
+      <div>
+        <Menu/>
+        <input type="text" onChange={this.searchCityHandler}/>
+          <Switch>
+            <Route exact path='/'/>
+            <Route path='/favorites' component={() => <Favorites httpReq={this.httpRequest} getWeather={this.currentConditionsRequestBuilder}/>}/>
+          </Switch>
+    
+      </div>
+      </Router>
+    );
   }
-
-
-
-render(){
-  return (
-    <Router>
-    <div>
-      <Menu/>
-        <Switch>
-          <Route exact path='/'/>
-          <Route path='/favorites' component={() => <Favorites httpReq={this.httpRequest} getWeather={this.currentConditionsRequestBuilder}/>}/>
-        </Switch>
-   
-    </div>
-    </Router>
-  );
-}
 
 }
 
