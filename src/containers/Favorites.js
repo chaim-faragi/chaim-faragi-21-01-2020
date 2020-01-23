@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 import City from '../components/City';
@@ -51,7 +52,7 @@ export default class Favorites extends Component {
         let favCities = <td>please add cities to favorites</td>;
         if(this.state.cities.length > 0){
             favCities = this.state.cities.map( (city, index) => {
-                return <td key={index}><City city={city}/></td>
+                return <td key={index}><Link to={{pathname:"/", search:"?idx="+index}}><City city={city}/></Link></td>
             });
         }
 

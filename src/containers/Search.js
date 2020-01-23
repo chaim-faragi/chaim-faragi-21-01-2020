@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {withRouter, Route} from 'react-router-dom';
 import axios from 'axios';
 
 import City from '../components/City'
@@ -6,7 +7,7 @@ import ForecastDay from '../components/ForecastDay';
 import './Search.css'
 
 
-export default class Search extends Component{
+ class Search extends Component{
 
     state={
         cities:[],
@@ -25,7 +26,19 @@ export default class Search extends Component{
     }
 
     componentDidMount(){
-        this.selectedCityHandler();
+        console.log(this.props.location);
+        if(this.props.location){
+            const params = new URLSearchParams(this.props.location.search);
+            if(this.props.cities[params.get('idx')]){
+                const city = this.props.cities[params.get('idx')];
+                this.setSelectedCity(city);
+            }else{
+                this.selectedCityHandler();
+            }
+            
+            
+        }
+        
     }
 
     setSelectedCity = (city) => {
@@ -163,3 +176,5 @@ export default class Search extends Component{
         );
     }
 }
+
+export default withRouter(Search);
